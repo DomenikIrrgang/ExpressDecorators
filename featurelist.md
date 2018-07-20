@@ -55,9 +55,12 @@ export class ExampleModule {}
     middlewares: [
         BodyParser,
         CORS
-    ]
+    ],
     imports: [
         ExampleModule
+    ],
+    providers: [
+        AuthenticationService
     ]
 })
 export class ExampleServer {}
@@ -72,7 +75,7 @@ export class ExampleServer {}
 
 ```typescript
 @Controller({
-    path: '/exmaplepath'
+    path: '/exmaplepath',
     middlewares: [
         Authorized
     ]
@@ -96,7 +99,6 @@ export class ExampleController {
 - A middleware should intercept a request to a resource and decide to weather or not the request shall be passed on.
 
 ```typescript
-
 export class ExampleMiddleware implements Middleware {
 
     constructor(private authorizationService: AuthorizationService) {}
@@ -111,4 +113,20 @@ export class ExampleMiddleware implements Middleware {
         });
     }
 }
+```
+
+## App
+
+```typescript
+@App({
+    bootstrap: [ExampleServer]
+})
+export class ExampleApp extends ExpressApp {}
+
+const exampleApp = new ExampleApp()
+exampleApp.start((server) => {
+    console.log("Application is running on port: " + server.port);
+}, (error) => {
+    console.log("Error: Could not start application.", error);
+})
 ```
