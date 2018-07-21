@@ -1,6 +1,5 @@
-export class App {
-    
-    public getName(): string {
-        return "ExpressApp";
+export class Something {
+    public doSomething(): void {
+        console.log("hello world");
     }
 }

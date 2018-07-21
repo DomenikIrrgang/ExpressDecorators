@@ -1,4 +1,4 @@
-# ExpressDecorators
+# ExpressDecorators [![Build Status](https://travis-ci.org/DomenikIrrgang/ExpressDecorators.svg?branch=master)](https://travis-ci.org/DomenikIrrgang/ExpressDecorators)
 
 This project is trying to achieve to provide Angular-like annotations for using the express framework.
 

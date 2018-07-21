@@ -1,4 +1,4 @@
-import { App } from "../lib/index";
+import { App } from "../lib/App";
 import { expect } from "chai";
 
 describe('getName function Test', () => {
