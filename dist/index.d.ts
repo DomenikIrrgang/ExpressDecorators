@@ -1,3 +1,1 @@
-export interface App {
-    name: string;
-}
+export {};

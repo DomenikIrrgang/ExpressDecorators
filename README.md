@@ -107,7 +107,7 @@ export class ExampleMiddleware implements Middleware {
 
     constructor(private authorizationService: AuthorizationService) {}
 
-    public onRequest(@Request() request: Request, @Response() response: Response, @NextFunction() next: NextFunction, @Header('X-Auth-Token') token: string) {
+    public onRequest(request: Request, response: Response, next: NextFunction) {
         this.authorizationService.isAuthorized(token).subscribe(authorized => {
             if (authorized) {
                 next()
