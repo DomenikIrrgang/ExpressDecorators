@@ -1,6 +1,10 @@
+# ExpressDecorators
+
+This project is trying to achieve to provide Angular-like annotations for using the express framework.
+
 # Featurelist
 
-This is a list of all features that will be implemented in this library.
+This is a list of all features that will be implemented.
 
 ## Dependency Injection
 
