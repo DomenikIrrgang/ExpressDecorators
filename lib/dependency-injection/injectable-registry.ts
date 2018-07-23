@@ -1,7 +1,7 @@
-import { InjectableObject, isInjectable } from "../decorators/injectable.decorator";
+import { isInjectable } from "../decorators/injectable.decorator";
 
 class InjectableRegistry {
-    private injectables: InjectableObject[] = [];
+    private injectables: any[] = [];
 
     public addInjectable(injectable: any): void {
         if (isInjectable(injectable)) {

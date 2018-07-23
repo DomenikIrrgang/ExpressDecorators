@@ -4,13 +4,13 @@ import { Middleware } from "../routing/Middleware";
 export function Server(settings: ServerSettings) {
     return (target: any) => {
         makeInjectable(target);
-        target.isServer = true;
-        target.prototype.settings = settings;
+        Reflect.defineMetadata("custom:type", "server", target);
+        Reflect.defineMetadata("custom:settings", settings, target);
     }
 }
 
 export function isServer(object: any): boolean {
-    return object.isServer !== undefined;
+    return Reflect.getMetadata("custom:type", object) === "server";
 }
 
 export interface ServerSettings {

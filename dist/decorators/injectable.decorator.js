@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const injectable_registry_1 = require("../dependency-injection/injectable-registry");
 require("reflect-metadata");
 function Injectable() {
     return (target) => {
@@ -9,12 +8,11 @@ function Injectable() {
 }
 exports.Injectable = Injectable;
 function makeInjectable(target) {
-    target.isInjectable = true;
-    injectable_registry_1.default.addInjectable(target);
+    Reflect.defineMetadata("custom:injectable", true, target);
 }
 exports.makeInjectable = makeInjectable;
 function isInjectable(object) {
-    return object.isInjectable !== undefined;
+    return Reflect.getMetadata("custom:injectable", object) === true;
 }
 exports.isInjectable = isInjectable;
 //# sourceMappingURL=injectable.decorator.js.map

@@ -1,8 +1,8 @@
-import { InjectableObject, isInjectable } from "../decorators/injectable.decorator";
+import { isInjectable } from "../decorators/injectable.decorator";
 
 export class Injector {
 
-    private instances: InjectableObject[] = [];
+    private instances: any[] = [];
 
     public getInstance(target: any): any {
         if (isInjectable(target)) {
@@ -38,3 +38,6 @@ export class Injector {
         return this.instances[target];
     }
 }
+
+const injector = new Injector();
+export default injector;

@@ -7,12 +7,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const module_decorator_1 = require("../decorators/module.decorator");
-let TestModule = class TestModule {
+const ExampleController_1 = require("./ExampleController");
+let ExampleModule = class ExampleModule {
 };
-TestModule = __decorate([
+ExampleModule = __decorate([
     module_decorator_1.Module({
-        controllers: []
+        controllers: [ExampleController_1.ExampleController],
+        path: "",
     })
-], TestModule);
-exports.TestModule = TestModule;
+], ExampleModule);
+exports.ExampleModule = ExampleModule;
 //# sourceMappingURL=TestModule.js.map

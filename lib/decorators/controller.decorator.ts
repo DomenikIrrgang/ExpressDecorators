@@ -3,13 +3,13 @@ import { makeInjectable } from "./injectable.decorator";
 export function Controller(settings: ControllerSettings) {
     return (target: any) => {
         makeInjectable(target);
-        target.prototype.isController = true;
-        target.prototype.settings = settings;
+        Reflect.defineMetadata("custom:type", "controller", target);
+        Reflect.defineMetadata("custom:settings", settings, target);
     }
 }
 
 export function isController(object: any): boolean {
-    return object.isController !== undefined;
+    return Reflect.getMetadata("custom:type", object) === "controller";
 }
 
 export interface ControllerSettings {

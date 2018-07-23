@@ -7,9 +7,9 @@ export function Injectable() {
 }
 
 export function makeInjectable(target: any): void {
-    target.isInjectable = true;
+    Reflect.defineMetadata("custom:injectable", true, target);
 }
 
 export function isInjectable(object: any): boolean {
-    return object.isInjectable !== undefined;
+    return Reflect.getMetadata("custom:injectable", object) === true;
 }

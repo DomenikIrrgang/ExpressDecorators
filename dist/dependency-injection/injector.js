@@ -40,4 +40,6 @@ class Injector {
     }
 }
 exports.Injector = Injector;
+const injector = new Injector();
+exports.default = injector;
 //# sourceMappingURL=injector.js.map

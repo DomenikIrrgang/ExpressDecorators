@@ -1,12 +1,12 @@
 export function App(settings: AppSettings) {
     return (target: any) => {
-        target.isApp = true;
-        target.prototype.settings = settings;
+        Reflect.defineMetadata("custom:type", "app", target);
+        Reflect.defineMetadata("custom:settings", settings, target.__proto__.__proto__);
     }
 }
 
 export function isApp(object: any): boolean {
-    return object.isApp !== undefined;
+    return Reflect.getMetadata("custom:type", object) === "app";
 }
 
 export interface AppSettings {

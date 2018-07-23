@@ -3,3 +3,5 @@ export declare class Injector {
     getInstance(target: any): any;
     private createInstance;
 }
+declare const injector: Injector;
+export default injector;

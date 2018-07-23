@@ -4,10 +4,13 @@ const injectable_decorator_1 = require("./injectable.decorator");
 function Module(settings) {
     return (target) => {
         injectable_decorator_1.makeInjectable(target);
-        target.prototype.controllers = settings.controllers;
-        target.prototype.middlewares = settings.middlewares;
-        target.prototype.providers = settings.providers;
+        Reflect.defineMetadata("custom:type", "module", target);
+        Reflect.defineMetadata("custom:settings", settings, target);
     };
 }
 exports.Module = Module;
+function isModule(object) {
+    return Reflect.getMetadata("custom:type", object) === "module";
+}
+exports.isModule = isModule;
 //# sourceMappingURL=module.decorator.js.map

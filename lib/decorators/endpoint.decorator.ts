@@ -6,23 +6,25 @@ import { HttpMethod } from "../routing/http-method";
  * 
  * @param path Path under which the endpoint will be mounted. (ControllerPath + "/" + path)
  */
-export function Endpoint(options: EndpointOptions) {
+export function Endpoint(options: EndpointSettings) {
     return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
         markEndpoint(options, target, propertyKey, descriptor);
     }
 }
 
-export function markEndpoint(options: EndpointOptions, target: any, propertyKey: string, descriptor: PropertyDescriptor): void {
-    if (target.endpoints === undefined) {
-        target.endpoints = [];
+export function markEndpoint(settings: EndpointSettings, target: any, propertyKey: string, descriptor: PropertyDescriptor): void {
+    if (Reflect.getMetadata("custom:endpoints", target) === undefined) {
+        Reflect.defineMetadata("custom:endpoints", [], target);
     }
-    target.endpoints.push({
-        options,
+    let endpoints = Reflect.getMetadata("custom:endpoints", target);
+    endpoints.push({
+        settings,
         descriptor
     });
+    Reflect.defineMetadata("custom:endpoints", endpoints, target);
 }
 
-export function markMethodEndpoint(options: MethodEndpointOptions, method: HttpMethod, target: any, propertyKey: string, descriptor: PropertyDescriptor): void {
+export function markMethodEndpoint(options: MethodEndpointSettings, method: HttpMethod, target: any, propertyKey: string, descriptor: PropertyDescriptor): void {
     markEndpoint({
         method: method,
         middlewares: options.middlewares,
@@ -30,11 +32,11 @@ export function markMethodEndpoint(options: MethodEndpointOptions, method: HttpM
     }, target, propertyKey, descriptor);
 }
 
-export interface MethodEndpointOptions {
+export interface MethodEndpointSettings {
     path: string;
     middlewares?: Middleware[];
 }
 
-export interface EndpointOptions extends MethodEndpointOptions{
+export interface EndpointSettings extends MethodEndpointSettings {
     method: HttpMethod;
 }
